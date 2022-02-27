@@ -49,19 +49,19 @@ import java.security.interfaces.RSAKey;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import org.conscrypt.OpenSSLProvider;
 /**
  * Command-line tool for signing APKs and for checking whether an APK's signature are expected to
  * verify on Android devices.
  */
 public class ApkSignerTool {
 
-    private static final String VERSION = "0.9";
-    private static final String HELP_PAGE_GENERAL = "help.txt";
-    private static final String HELP_PAGE_SIGN = "help_sign.txt";
-    private static final String HELP_PAGE_VERIFY = "help_verify.txt";
-    private static final String HELP_PAGE_ROTATE = "help_rotate.txt";
-    private static final String HELP_PAGE_LINEAGE = "help_lineage.txt";
+      private static final String VERSION = "0.9";
+    private static final String HELP_PAGE_GENERAL = "/help.txt";
+    private static final String HELP_PAGE_SIGN = "/help_sign.txt";
+    private static final String HELP_PAGE_VERIFY = "/help_verify.txt";
+    private static final String HELP_PAGE_ROTATE = "/help_rotate.txt";
+    private static final String HELP_PAGE_LINEAGE = "/help_lineage.txt";
 
     private static MessageDigest sha256 = null;
     private static MessageDigest sha1 = null;
@@ -120,7 +120,7 @@ public class ApkSignerTool {
      */
     private static void addProviders() {
         try {
-            Security.addProvider(new org.conscrypt.OpenSSLProvider());
+            Security.addProvider(new OpenSSLProvider());
         } catch (UnsatisfiedLinkError e) {
             // This is expected if the library path does not include the native conscrypt library;
             // the default providers support all but PSS algorithms.

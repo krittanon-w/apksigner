@@ -191,6 +191,7 @@ public abstract class ZipUtils {
         long fileSize = zip.size();
         if (fileSize < ZIP_EOCD_REC_MIN_SIZE) {
             // No space for EoCD record in the file.
+            System.out.println("No space for EoCD record in the file.");
             return null;
         }
         // Lower maxCommentSize if the file is too small.
