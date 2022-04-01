@@ -52,7 +52,7 @@ jobs:
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/libs/apksigner.jar
-        asset_name: apksigner-${{ github.ref }}-${{ steps.date.outputs.date }}.jar
-        tag: ${{ github.ref }}-${{ steps.date.outputs.date }}
+        asset_name: apksigner-${{ github.ref_name }}-${{ steps.date.outputs.date }}.jar
+        tag: ${{ github.ref_name }}-${{ steps.date.outputs.date }}
         overwrite: true
-        # body: "R"
+        body: "-"
