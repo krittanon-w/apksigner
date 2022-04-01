@@ -27,7 +27,9 @@ jobs:
         distribution: temurin
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
- #     with:
-#        arguments: jar
-    - name: Execute Gradle build
-      run: ./gradlew build
+      with:
+        gradle-version: 7.1
+    - name: Setup and execute Gradle 'test' task
+      run: gradle test
+    - name: Execute Gradle build jar
+      run: gradle jar
