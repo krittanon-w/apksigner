@@ -15,26 +15,40 @@ on:
 
 jobs:
   build:
-
     runs-on: Ubuntu-20.04
-
     steps:
-    - uses: actions/checkout@v3
+    - name: Git checkout
+      uses: actions/checkout@v3
+      
     - name: Set up JDK 1.8
       uses: actions/setup-java@v3
       with:
         java-version: 8
         distribution: temurin
+        
     - name: Setup Gradle
       uses: gradle/gradle-build-action@v2
       with:
         gradle-version: 7.1
+        
     - name: Setup and Execute Gradle 'test' task
       run: gradle test
+      
     - name: Execute Gradle 'jar' task
       run: gradle jar
+      
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: apksigner
         path: build/libs
+        
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: build/libs/apksigner.jar
+        asset_name: apksigner.jar
+        tag: ${{ github.ref }}
+        overwrite: true
+        body: "This is my release text"
