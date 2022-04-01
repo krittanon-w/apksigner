@@ -43,12 +43,16 @@ jobs:
         name: apksigner
         path: build/libs
         
+    - name: Get current date
+      id: date
+      run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
         file: build/libs/apksigner.jar
-        asset_name: apksigner.jar
-        tag: ${{ github.ref }}
+        asset_name: apksigner-${{ github.ref }}-${{ steps.date.outputs.date }}.jar
+        tag: ${{ github.ref }}-${{ steps.date.outputs.date }}
         overwrite: true
-        body: "This is my release text"
+        # body: "R"
