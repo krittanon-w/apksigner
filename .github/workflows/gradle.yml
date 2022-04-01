@@ -33,7 +33,8 @@ jobs:
       run: gradle test
     - name: Execute Gradle 'jar' task
       run: gradle jar
-    - uses: actions/upload-artifact@v3
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
       with:
-        name: Upload artifact
+        name: apksigner
         path: build/libs
